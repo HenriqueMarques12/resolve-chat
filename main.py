@@ -1,6 +1,15 @@
 import streamlit as st
 import requests
 
+# URL da logo
+logo_url = "https://res.cloudinary.com/dyykoh8t4/image/upload/v1710548053/Resolve/image1_ugrpkk.png"
+
+# Exibir a logo
+st.image(logo_url, width=200)
+
+# Título do aplicativo
+st.title("Resolve Agentes")
+
 def get_agents():
     try:
         response = requests.get("https://dash.resolvenergiasolar.com/api/v1/agents")
@@ -28,8 +37,6 @@ def ask_agent_with_tool(agent_id, tool_name, query):
         return response.json()
     except requests.RequestException:
         return {"error": "Failed to get response"}
-
-st.title("Perguntas para Agentes")
 
 with st.spinner("Carregando agentes..."):
     agents = get_agents()
